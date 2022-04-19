@@ -4,9 +4,10 @@
 # Plat: ubuntu 18.04 20.04
 # Eg  : bash wordpress_installation.sh "你的域名"
 
-# 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw
+# 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw和nginx
 apt install php php-fpm php-opcache php-mysql nginx php-gd  php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server pwgen expect -y
 ufw disable
+/etc/init.d/nginx stop
 
 
 # 定义域名,MySQL和wordpress(以下简称wp)需要用的参数
