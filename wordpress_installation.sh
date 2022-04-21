@@ -4,10 +4,9 @@
 # Plat: ubuntu 18.04 20.04
 # Eg  : bash wordpress_installation.sh "你的域名"
 
-# 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw和nginx
+# 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw
 apt install php php-fpm php-opcache php-mysql nginx php-gd  php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server pwgen expect -y
 ufw disable
-/etc/init.d/nginx stop
 
 
 # 定义域名,MySQL和wordpress(以下简称wp)需要用的参数
@@ -81,7 +80,7 @@ EOC
 source ~/.bashrc
 curl https://get.acme.sh | sh
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-~/.acme.sh/acme.sh --issue -d "$wp_domainName" --alpn -k ec-256
+~/.acme.sh/acme.sh --issue -d "$wp_domainName" -k ec-256 --nginx --reloadcmd "nginx -s reload"
 ~/.acme.sh/acme.sh --installcert -d "$wp_domainName" --fullchainpath $ssl_dir/${wp_domainName}.crt --keypath $ssl_dir/${wp_domainName}.key --ecc
 chown www-data.www-data $ssl_dir/*
 
@@ -169,12 +168,12 @@ apt purge apache2 -y && apt autoremove -y
 # 输出配置信息
 #wp安装配置信息文件
 wp_ins_info="/root/wp_installation_info.txt"
-> $wp_ins_info
-echo "你的域名: $wp_domainName" | tee $wp_ins_info
-echo "MySQL root密码: $mysql_root_pwd" | tee -a $wp_ins_info
-echo "wp库名: $wp_db_name" | tee -a $wp_ins_info
-echo "wp用户名: $wp_user_name" | tee -a $wp_ins_info
-echo "wp密码: $wp_user_pwd" | tee -a $wp_ins_info
-echo "wp源码目录: $wp_code_dir" | tee -a $wp_ins_info
-echo "ssl证书目录: $ssl_dir" | tee -a $wp_ins_info
-
+echo "
+你的域名	: wp_domainName
+MySQL root密码	: mysql_root_pwd
+wp库名		: wp_db_name
+wp用户名	: wp_user_name
+wp密码		: wp_user_pwd
+wp源码目录	: wp_code_dir
+ssl证书目录	: ssl_dir
+" | tee $wp_ins_info
