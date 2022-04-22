@@ -78,7 +78,8 @@ EOC
 
 # 安装acme,并申请加密证书
 source ~/.bashrc
-curl https://get.acme.sh | sh
+if nc -z localhost 443;then /etc/init.d/nginx stop;fi
+if ! [ -d /root/.acme.sh ];then curl https://get.acme.sh | sh;fi
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue -d "$wp_domainName" -k ec-256 --alpn
 ~/.acme.sh/acme.sh --installcert -d "$wp_domainName" --fullchainpath $ssl_dir/${wp_domainName}.crt --keypath $ssl_dir/${wp_domainName}.key --ecc
