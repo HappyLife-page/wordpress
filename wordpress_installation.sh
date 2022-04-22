@@ -5,7 +5,7 @@
 # Eg  : bash wordpress_installation.sh "你的域名"
 
 # 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw
-apt install php php-fpm php-opcache php-mysql nginx php-gd  php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server pwgen brotli expect -y
+apt install php php-fpm php-opcache php-mysql nginx php-gd  php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server memcached php-memcached php-memcache php-redis redis-server pwgen brotli expect -y
 ufw disable
 
 
@@ -86,6 +86,7 @@ chown www-data.www-data $ssl_dir/*
 
 
 ## 把申请证书命令添加到计划任务
+if ! grep -q '/usr/local/bin/ssl_renew.sh' /var/spool/cron/crontabs/root;then
 echo -n '#!/bin/bash
 /etc/init.d/nginx stop
 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &> /root/renew_ssl.log
@@ -93,6 +94,7 @@ echo -n '#!/bin/bash
 ' > /usr/local/bin/ssl_renew.sh
 chmod +x /usr/local/bin/ssl_renew.sh
 (crontab -l;echo "15 03 */3 * * /usr/local/bin/ssl_renew.sh") | crontab
+fi
 
 
 # 给wp添加nginx配置文件
