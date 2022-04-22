@@ -80,7 +80,7 @@ EOC
 source ~/.bashrc
 curl https://get.acme.sh | sh
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-~/.acme.sh/acme.sh --issue -d "$wp_domainName" -k ec-256 --nginx --reloadcmd "nginx -s reload"
+~/.acme.sh/acme.sh --issue -d "$wp_domainName" -k ec-256 --alpn --reloadcmd "nginx -s reload"
 ~/.acme.sh/acme.sh --installcert -d "$wp_domainName" --fullchainpath $ssl_dir/${wp_domainName}.crt --keypath $ssl_dir/${wp_domainName}.key --ecc
 chown www-data.www-data $ssl_dir/*
 
