@@ -5,8 +5,7 @@
 # Eg  : bash wordpress_installation.sh
 
 # 使用Ubuntu官方源安装nginx php mysql和一些依赖
-apt install nginx php php-fpm php-opcache php-mysql php-gd php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server pwgen expect -y
-
+apt install nginx php php-fpm php-opcache php-mysql php-gd php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server memcached php-memcached php-memcache php-redis redis-server -y
 
 ## 定义域名,MySQL和wordpress(以下简称wp)需要用的参数
 ##0.设置你的解析好的域名,如本例子中的wp.v2ray.one
