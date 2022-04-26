@@ -182,11 +182,11 @@ apt purge apache2 -y && apt autoremove -y
 #wp安装配置信息文件
 wp_ins_info="/root/wp_installation_info.txt"
 echo "
-你的域名	: wp_domainName
-MySQL root密码	: mysql_root_pwd
-wp库名		: wp_db_name
-wp用户名	: wp_user_name
-wp密码		: wp_user_pwd
-wp源码目录	: wp_code_dir
-ssl证书目录	: ssl_dir
+你的域名	: $wp_domainName
+MySQL root密码	: $mysql_root_pwd
+wp库名		: $wp_db_name
+wp用户名	: $wp_user_name
+wp密码		: $wp_user_pwd
+wp源码目录	: $wp_code_dir
+ssl证书目录	: $ssl_dir
 " | tee $wp_ins_info
