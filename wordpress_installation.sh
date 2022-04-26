@@ -164,7 +164,7 @@ server {
             log_not_found off;
         }'"
     }
-" >> /etc/nginx/conf.d/wordpress.conf
+" > /etc/nginx/conf.d/wordpress.conf
 
 
 # 配置php
