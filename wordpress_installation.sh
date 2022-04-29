@@ -5,7 +5,7 @@
 # Eg  : bash wordpress_installation.sh "你的域名"
 
 # 使用Ubuntu官方源安装nginx php mysql和一些依赖，关闭防火墙ufw
-apt install nginx php php-fpm php-opcache php-mysql php-gd php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server memcached php-memcached php-memcache php-redis redis-server -y
+apt install nginx php php-fpm php-opcache php-mysql php-gd php-xmlrpc php-imagick php-mbstring php-zip php-json php-mbstring php-curl php-xml mariadb-server memcached php-memcached php-memcache -y
 ufw disable
 
 
